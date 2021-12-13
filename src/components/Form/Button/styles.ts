@@ -2,7 +2,9 @@ import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
 
-export const Container = styled(TouchableOpacity)`
+export const Container = styled(TouchableOpacity).attrs({
+    activeOpacity: 0.6,
+})`
     background-color: ${({ theme }) => theme.colors.secondary};
 
     width: 100%;
