@@ -30,6 +30,8 @@ export function Categories({
     setCategory,
     closeCategories,
 }: CategoriesProps) {
+    const numCols = 2;
+
     function handleSelectCategory(item: Category) {
         setCategory(item);
     }
@@ -52,6 +54,9 @@ export function Categories({
                     </Category>
                 )}
                 ItemSeparatorComponent={() => <Separator />}
+                contentContainerStyle={{ paddingHorizontal: 10, paddingVertical: 5 }}
+                numColumns={numCols}
+                key={numCols}
             />
 
             <Footer>

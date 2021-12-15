@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
-import { RFValue } from 'react-native-responsive-fontsize';
+import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 interface CategoryProps {
@@ -13,20 +13,26 @@ export const Container = styled(GestureHandlerRootView)`
 `;
 
 export const Category = styled.TouchableOpacity<CategoryProps>`
-    width: 100%;
+    width: 47%;
+    height: ${RFValue(150)}px;
     padding: ${RFValue(15)}px;
+    margin: 5px;
 
-    flex-direction: row;
+    border: 1px solid ${({ theme }) => theme.colors.secondary};
+    border-radius: 5px;
+
+    justify-content: center;
     align-items: center;
 
     ${({ isActive }) => isActive && css`
         background-color: ${({ theme }) => theme.colors.secondaryDark};
+        border: none;
     `}
 `;
 
 export const Icon = styled(Feather)`
     font-size: ${RFValue(20)}px;
-    margin-right: 16px;
+    margin-bottom: 15px;
 `;
 
 export const Name = styled.Text`
@@ -38,6 +44,7 @@ export const Separator = styled.View`
     height: 1px;
     width: 100%;
     background-color: ${({ theme }) => theme.colors.text};
+    display: none;
 `;
 
 export const Footer = styled.View`
