@@ -20,7 +20,7 @@ type Category = {
 }
 
 interface CategoriesProps {
-    category: string;
+    category: Category;
     setCategory: (category: Category) => void;
     closeCategories: () => void;
 }
@@ -30,6 +30,10 @@ export function Categories({
     setCategory,
     closeCategories,
 }: CategoriesProps) {
+    function handleSelectCategory(item: Category) {
+        setCategory(item);
+    }
+
     return (
         <Container>
             <Header title="Categoria" />
@@ -39,7 +43,10 @@ export function Categories({
                 style={{ flex: 1, width: '100%' }}
                 keyExtractor={(item) => item.key}
                 renderItem={({ item }) => (
-                    <Category>
+                    <Category 
+                        onPress={() => handleSelectCategory(item)}
+                        isActive={category.key === item.key}
+                    >
                         <Icon name={item.icon} />
                         <Name>{item.name}</Name>
                     </Category>
@@ -48,7 +55,10 @@ export function Categories({
             />
 
             <Footer>
-                <Button title="Selecionar" />
+                <Button 
+                    title="Selecionar"
+                    onPress={closeCategories}
+                />
             </Footer>
         </Container>
     );

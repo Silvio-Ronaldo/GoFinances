@@ -1,18 +1,27 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import { Feather } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-export const Container = styled.View`
+interface CategoryProps {
+    isActive: boolean;
+}
+
+export const Container = styled(GestureHandlerRootView)`
     flex: 1;
     background-color: ${({ theme }) => theme.colors.background};
 `;
 
-export const Category = styled.View`
+export const Category = styled.TouchableOpacity<CategoryProps>`
     width: 100%;
     padding: ${RFValue(15)}px;
 
     flex-direction: row;
     align-items: center;
+
+    ${({ isActive }) => isActive && css`
+        background-color: ${({ theme }) => theme.colors.secondaryDark};
+    `}
 `;
 
 export const Icon = styled(Feather)`
