@@ -54,7 +54,7 @@ export function Categories({
                     </Category>
                 )}
                 ItemSeparatorComponent={() => <Separator />}
-                contentContainerStyle={{ paddingHorizontal: 10, paddingVertical: 5 }}
+                contentContainerStyle={{ paddingHorizontal: 10, paddingVertical: 24 }}
                 numColumns={numCols}
                 key={numCols}
             />

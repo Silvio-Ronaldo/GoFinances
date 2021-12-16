@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 import { 
   useFonts, 
@@ -27,6 +28,11 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <StatusBar 
+        translucent 
+        backgroundColor={theme.colors.primary} 
+        barStyle="light-content" 
+      />
       <Register />
     </ThemeProvider>
   )
