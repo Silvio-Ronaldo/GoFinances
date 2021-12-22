@@ -29,6 +29,7 @@ const schema = Yup.object().shape({
     name: Yup.string().required('Nome é obrigatório'),
     amount: Yup
         .number()
+        .transform((_value, originalValue) => Number(originalValue.replace(/,/, '.')))
         .typeError('Informe um valor numérico')
         .positive('O preço não pode ser negativo')
         .required('Preço é obrigatório'),
@@ -97,14 +98,14 @@ export function Register() {
                             placeholder='Nome da transação'
                             autoCapitalize='sentences'  
                             autoCorrect={false}
-                            error={errors.name && errors.name.message}
+                            error={errors?.name && errors.name.message}
                         />
                         <InputForm
                             name='amount'
                             control={control}
                             placeholder='Preço'
                             keyboardType='numeric'
-                            error={errors.amount && errors.amount.message}
+                            error={errors?.amount && errors.amount.message}
                         />
 
                         <TransactionTypes>
