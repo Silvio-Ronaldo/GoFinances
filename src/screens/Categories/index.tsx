@@ -8,6 +8,7 @@ import { Button } from '../../components/Form/Button';
 import { 
     Container, 
     Category, 
+    CategoryButton,
     Icon, 
     Name, 
     Separator,
@@ -46,11 +47,12 @@ export function Categories({
                 keyExtractor={(item) => item.key}
                 renderItem={({ item }) => (
                     <Category 
-                        onPress={() => handleSelectCategory(item)}
                         isActive={category.key === item.key}
                     >
-                        <Icon name={item.icon} />
-                        <Name>{item.name}</Name>
+                        <CategoryButton onPress={() => handleSelectCategory(item)}>
+                            <Icon name={item.icon} />
+                            <Name>{item.name}</Name>
+                        </CategoryButton>
                     </Category>
                 )}
                 ItemSeparatorComponent={() => <Separator />}

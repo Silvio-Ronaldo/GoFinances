@@ -18,8 +18,14 @@ export function AppRoutes() {
                 tabBarActiveBackgroundColor: theme.colors.primary,
                 tabBarActiveTintColor: theme.colors.shape,
                 tabBarInactiveTintColor: theme.colors.textAlternative,
-                tabBarLabelPosition: 'beside-icon',
+                tabBarLabelPosition: 'below-icon',
                 tabBarHideOnKeyboard: true,
+                tabBarStyle: {
+                    height: 58,
+                },
+                tabBarItemStyle: {
+                    padding: 8,
+                }
             }}
         >
             <Screen 
