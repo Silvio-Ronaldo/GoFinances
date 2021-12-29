@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import uuid from 'react-native-uuid';
+import { useNavigation, NavigationProp, ParamListBase } from '@react-navigation/native';
 
 import { Header } from '../../components/Header';
 import { InputForm } from '../../components/Form/InputForm';
@@ -35,6 +38,8 @@ const schema = Yup.object().shape({
         .required('Preço é obrigatório'),
 });
 
+const collectionKey = '@gofinances:transactions';
+
 export function Register() {
     const [transactionType, setTransactionType] = useState<TransactionType>
                                                     ('' as TransactionType);
@@ -44,7 +49,9 @@ export function Register() {
         name: 'Categoria',
     });
 
-    const { control, handleSubmit, formState: { errors } } = useForm({
+    const { navigate }: NavigationProp<ParamListBase> = useNavigation();
+
+    const { control, handleSubmit, formState: { errors }, reset } = useForm({
         resolver:  yupResolver(schema),
     });
 
@@ -60,7 +67,7 @@ export function Register() {
         setCategoriesModalOpen(false);
     }
 
-    function handleRegister(formData: FormDataProps) {
+    async function handleRegister(formData: FormDataProps) {
         if(!transactionType) {
             return Alert.alert(
                 'Transação não encontrada', 
@@ -75,14 +82,38 @@ export function Register() {
             )
         }
         
-        const data = {
+        const newTransaction = {
+            id: String(uuid.v4()),
             name: formData.name,
             amount: formData.amount,
-            transactionType,
-            category: category.key
+            type: transactionType,
+            category: category.key,
+            date: new Date(),
         }
 
-        console.log(data);
+        try {
+            const data = await AsyncStorage.getItem(collectionKey);
+            const currentData = data ? JSON.parse(data) : [];
+
+            const formattedData = [
+                newTransaction,
+                ...currentData,
+            ];
+
+            await AsyncStorage.setItem(collectionKey, JSON.stringify(formattedData));
+
+            reset();
+            setTransactionType('' as TransactionType);
+            setCategory({
+                key: 'category',
+                name: 'Categoria',
+            });
+
+            navigate('Listagem');
+        } catch (err) {
+            console.log(err);
+            Alert.alert('Erro ao salvar a transação.', 'Tente novamente.');
+        }
     }
 
     return (
