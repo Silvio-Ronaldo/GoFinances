@@ -150,8 +150,8 @@ export function Resume() {
                     <ChartContainer>
                         <VictoryPie
                             data={totalByCategories}
-                            x="percent"
-                            y="total"
+                            x={(datum) => datum.percent}
+                            y={(datum) => datum.total}
                             colorScale={totalByCategories.map(category => category.color)}
                             style={{
                                 labels: {
