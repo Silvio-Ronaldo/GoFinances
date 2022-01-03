@@ -22,7 +22,10 @@ import {
     MonthSelectIcon,
     Month,
     ChartContainer,
-    LoadContainer
+    LoadContainer,
+    EmptyContainer,
+    EmptyIcon,
+    EmptyText,
 } from './styles';
 
 interface TransactionData {
@@ -147,31 +150,45 @@ export function Resume() {
                         </MonthSelectButton>
                     </MonthSelect>
 
-                    <ChartContainer>
-                        <VictoryPie
-                            data={totalByCategories}
-                            x={(datum) => datum.percent}
-                            y={(datum) => datum.total}
-                            colorScale={totalByCategories.map(category => category.color)}
-                            style={{
-                                labels: {
-                                    fontSize: RFValue(18),
-                                    fontWeight: 'bold',
-                                    fill: theme.colors.shape,
-                                }
-                            }}
-                            labelRadius={75}
-                        />
-                    </ChartContainer>
+                    { totalByCategories.length === 0 ? (
+                        <EmptyContainer>
+                            <EmptyIcon name="check-circle" />
+                            <EmptyText>
+                                Parabéns! Não há custos para {''}
+                                {format(selectedDate, "MMMM 'de' yyyy", {
+                                    locale: ptBR,
+                                })}.
+                            </EmptyText>
+                        </EmptyContainer>
+                    ) : (
+                        <>
+                            <ChartContainer>
+                                <VictoryPie
+                                    data={totalByCategories}
+                                    x={(datum) => datum.percent}
+                                    y={(datum) => datum.total}
+                                    colorScale={totalByCategories.map(category => category.color)}
+                                    style={{
+                                        labels: {
+                                            fontSize: RFValue(18),
+                                            fontWeight: 'bold',
+                                            fill: theme.colors.shape,
+                                        }
+                                    }}
+                                    labelRadius={75}
+                                />
+                            </ChartContainer>
 
-                    { totalByCategories.map(item => (
-                        <HistoryCard 
-                            key={item.key}
-                            title={item.name}
-                            amount={item.totalFormatted} 
-                            color={item.color}
-                        />
-                    ))}
+                            { totalByCategories.map(item => (
+                                <HistoryCard 
+                                    key={item.key}
+                                    title={item.name}
+                                    amount={item.totalFormatted} 
+                                    color={item.color}
+                                />
+                            ))}
+                        </>
+                    )}
                 </Content>
             )}
         </Container>
