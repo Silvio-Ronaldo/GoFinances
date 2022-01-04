@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import { categories } from '../../utils/categories';
 
@@ -10,7 +10,7 @@ import {
     Category,
     Icon,
     CategoryName,
-    Date 
+    Date,
 } from './styles';
 
 export interface TransactionCardData {
@@ -23,9 +23,10 @@ export interface TransactionCardData {
 
 interface TransactionCardProps {
     data: TransactionCardData;
+    children: ReactNode;
 }
 
-export function TransactionCard({ data }: TransactionCardProps) {
+export function TransactionCard({ data, children }: TransactionCardProps) {
     const category = categories.filter(item => item.key === data.category)[0];
 
     return (
@@ -43,6 +44,8 @@ export function TransactionCard({ data }: TransactionCardProps) {
                 </Category>
                 <Date>{data.date}</Date>
             </Footer>
+
+            {children}
         </Container>
     );
 }

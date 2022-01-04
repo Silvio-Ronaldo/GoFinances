@@ -122,3 +122,14 @@ export const EmptyText = styled.Text`
     margin-top: 24px;
     color: ${({ theme }) => theme.colors.textAlternative};
 `;
+
+export const RemoveButton = styled(BorderlessButton)`
+    position: absolute;
+    top: 20px;
+    right: 24px;
+`;
+
+export const RemoveIcon = styled(Feather)`
+    font-size: ${RFValue(16)}px;
+    color: ${({ theme }) => theme.colors.textAlternative};
+`;

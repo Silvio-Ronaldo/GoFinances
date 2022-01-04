@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { ActivityIndicator } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { ActivityIndicator, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 import { useTheme } from 'styled-components';
@@ -26,6 +26,8 @@ import {
     EmptyContainer,
     EmptyIcon,
     EmptyText,
+    RemoveButton,
+    RemoveIcon,
 } from './styles';
 
 export interface DataListProps extends TransactionCardData {
@@ -164,6 +166,46 @@ export function Dashboard() {
         setIsLoading(false);
     }, []);
 
+    const handleConfirmRemoveTransaction = useCallback(async (id: string) => {
+        setIsLoading(true);
+        const collectionKey = '@gofinances:transactions';
+
+        const response = await AsyncStorage.getItem(collectionKey);
+        const transactions = response ? JSON.parse(response) : [];
+
+        const transactionsFiltered = transactions.filter(
+            (transaction: DataListProps) => transaction.id !== id
+        );
+
+        setTransactionsData(transactionsFiltered);
+        await AsyncStorage.setItem(collectionKey, JSON.stringify(transactionsFiltered));
+        await loadTransactions();
+
+        return;
+    }, [transactionsData]);
+
+    const handleRemoveTransaction = useCallback(async (id: string, name: string) => {
+        Alert.alert(
+            'Excluir transação', 
+            `Tem certeza que deseja excluir a transação: '${name}' ?`,
+            [
+                {
+                    text: 'Não',
+                    onPress: () => {},
+                    style: 'cancel',
+                },
+                {
+                    text: 'Sim',
+                    onPress: async () => handleConfirmRemoveTransaction(id),
+                }    
+            ],
+            {
+                cancelable: true,
+            }
+        );
+        setIsLoading(false);
+    }, []);
+
     useFocusEffect(useCallback(() => {
         loadTransactions();
     }, []));
@@ -225,7 +267,17 @@ export function Dashboard() {
                                 data={transactionsData}
                                 keyExtractor={item => item.id}
                                 renderItem={({ item }) => 
-                                    <TransactionCard data={item} />}
+                                    <TransactionCard data={item}>
+                                        <RemoveButton onPress={
+                                            () => handleRemoveTransaction(
+                                                item.id, 
+                                                item.name
+                                            )
+                                        }>
+                                            <RemoveIcon name="x" />
+                                        </RemoveButton>
+                                    </TransactionCard>
+                                }
                             />
                         </Transactions>
                     ) : (

@@ -1,6 +1,7 @@
 import styled from "styled-components/native";
 import { Feather } from '@expo/vector-icons';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { BorderlessButton } from "react-native-gesture-handler";
 
 interface TypeProps {
     type: 'up' | 'down';
@@ -12,6 +13,7 @@ export const Container = styled.View`
     padding: 17px 24px;
     border-radius: 5px;
     margin-bottom: 16px;
+    position: relative;
 `;
 
 export const Title = styled.Text`
