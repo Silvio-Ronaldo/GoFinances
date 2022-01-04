@@ -44,12 +44,12 @@ export function AppRoutes() {
             />
 
             <Screen 
-                name="Cadastrar"
+                name="Adicionar"
                 component={Register}
                 options={{
                     tabBarIcon: (({ size, color }) =>
                         <MaterialIcons 
-                            name="attach-money"
+                            name="add"
                             size={size}
                             color={color}
                         />

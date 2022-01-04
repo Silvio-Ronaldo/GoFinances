@@ -23,6 +23,9 @@ import {
     Title,
     TransactionsList,
     LoadContainer,
+    EmptyContainer,
+    EmptyIcon,
+    EmptyText,
 } from './styles';
 
 export interface DataListProps extends TransactionCardData {
@@ -198,32 +201,39 @@ export function Dashboard() {
                             type="up"
                             title="Entradas"
                             amount={highlightData.entries.total}
-                            lastTransaction={highlightData.entries.lastTransactionDate}
+                            lastTransaction={highlightData.entries.lastTransactionDate || 'Nenhuma entrada'}
                         />
                         <HighlightCard 
                             type="down"
                             title="Saídas"
                             amount={highlightData.cost.total}
-                            lastTransaction={highlightData.cost.lastTransactionDate}
+                            lastTransaction={highlightData.cost.lastTransactionDate || 'Nenhuma saída'}
                         />
                         <HighlightCard 
                             type="total"
                             title="Total"
                             amount={highlightData.sum.total}
-                            lastTransaction={highlightData.sum.lastTransactionDate}
+                            lastTransaction={highlightData.sum.lastTransactionDate || ''}
                         />
                     </HighlightCards>
 
-                    <Transactions>
-                        <Title>Listagem</Title>
+                    { transactionsData ? (
+                        <Transactions>
+                            <Title>Listagem</Title>
 
-                        <TransactionsList 
-                            data={transactionsData}
-                            keyExtractor={item => item.id}
-                            renderItem={({ item }) => 
-                                <TransactionCard data={item} />}
-                        />
-                    </Transactions>
+                            <TransactionsList 
+                                data={transactionsData}
+                                keyExtractor={item => item.id}
+                                renderItem={({ item }) => 
+                                    <TransactionCard data={item} />}
+                            />
+                        </Transactions>
+                    ) : (
+                        <EmptyContainer>
+                            <EmptyIcon name="meh" />
+                            <EmptyText>Ops! Nenhuma transação adicionada.</EmptyText>
+                        </EmptyContainer>
+                    )}
                 </>)
             }
         </Container>

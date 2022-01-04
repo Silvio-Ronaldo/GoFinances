@@ -119,7 +119,7 @@ export function Register() {
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <Container>
-                <Header title="Cadastro" />
+                <Header title="Nova transação" />
 
                 <Form>
                     <Fields>
@@ -161,7 +161,7 @@ export function Register() {
                     </Fields>
 
                     <Button 
-                        title="Enviar" 
+                        title="Adicionar" 
                         onPress={handleSubmit(handleRegister)}
                     />
                 </Form>

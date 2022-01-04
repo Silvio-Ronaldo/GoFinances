@@ -101,3 +101,24 @@ export const LoadContainer = styled.View`
     justify-content: center;
     align-items: center;
 `;
+
+export const EmptyContainer = styled.View`
+    margin-top: 100px;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const EmptyIcon = styled(Feather)`
+    font-size: ${RFValue(64)}px;
+    color: ${({ theme }) => theme.colors.textAlternative};
+`;
+
+export const EmptyText = styled.Text`
+    font-family: ${({ theme }) => theme.fonts.regular};
+    font-size: ${RFValue(20)}px;
+    width: 80%;
+    text-align: center;
+    margin-top: 24px;
+    color: ${({ theme }) => theme.colors.textAlternative};
+`;
