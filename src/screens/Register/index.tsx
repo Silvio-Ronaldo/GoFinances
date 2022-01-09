@@ -14,6 +14,8 @@ import { CategorySelect } from '../../components/Form/CategorySelect';
 import { Button } from '../../components/Form/Button';
 import { Categories } from '../Categories';
 
+import { useAuth } from '../../hooks/auth';
+
 import { 
     Container,
     Form,
@@ -38,8 +40,6 @@ const schema = Yup.object().shape({
         .required('Preço é obrigatório'),
 });
 
-const collectionKey = '@gofinances:transactions';
-
 export function Register() {
     const [transactionType, setTransactionType] = useState<TransactionType>
                                                     ('' as TransactionType);
@@ -49,11 +49,15 @@ export function Register() {
         name: 'Categoria',
     });
 
+    const { user } = useAuth();
+
     const { navigate }: NavigationProp<ParamListBase> = useNavigation();
 
     const { control, handleSubmit, formState: { errors }, reset } = useForm({
         resolver:  yupResolver(schema),
     });
+
+    const collectionKey = `@gofinances:transactions_user:${user.id}`;
 
     function handleSelectedTransactionButton(type: 'up' | 'down') {
         setTransactionType(type);

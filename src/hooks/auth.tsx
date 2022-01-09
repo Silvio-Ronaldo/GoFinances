@@ -14,7 +14,9 @@ type User = {
 
 type AuthContextData = {
     user: User;
+    isUserLoaded: boolean;
     signInWithGoogle: () => Promise<void>;
+    signOut: () => Promise<void>;
 }
 
 const AuthContext = createContext({} as AuthContextData);
@@ -32,6 +34,7 @@ interface AuthorizationResponse {
 
 export function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<User>({} as User);
+    const [isUserLoaded, setIsUserLoaded] = useState(false);
 
     const userCollectionKey = '@gofinances:user';
 
@@ -54,7 +57,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 const userLoggedIn = {
                     id: userInfo.id,
                     email: userInfo.email,
-                    name: userInfo.given_name,
+                    name: userInfo.name,
                     avatar: userInfo.picture,
                 }
 
@@ -66,6 +69,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
         }
     }
 
+    async function signOut() {
+        setUser({} as User);
+        await AsyncStorage.removeItem(userCollectionKey);
+    }
+
     useEffect(() => {
         async function loadUserStorageData() {
             const userStoraged = await AsyncStorage.getItem(userCollectionKey);
@@ -74,6 +82,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 const userLoggedIn = JSON.parse(userStoraged) as User;
                 setUser(userLoggedIn);
             }
+
+            setIsUserLoaded(true);
         }
 
         loadUserStorageData();
@@ -82,7 +92,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
     return (
         <AuthContext.Provider value={{ 
             user, 
-            signInWithGoogle 
+            isUserLoaded,
+            signInWithGoogle,
+            signOut,
         }}>
             {children}
         </AuthContext.Provider>

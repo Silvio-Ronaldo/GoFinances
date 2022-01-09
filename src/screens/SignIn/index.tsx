@@ -1,6 +1,7 @@
-import React from 'react';
-import { Alert } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, ActivityIndicator } from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { useTheme } from 'styled-components';
 
 import { SocialSignInButton } from '../../components/SocialSignInButton';
 
@@ -20,14 +21,19 @@ import Google from '../../assets/google.svg';
 import Apple from '../../assets/apple.svg';
 
 export function SignIn() {
+    const [isLoading, setIsLoading] = useState(false);
+
+    const theme = useTheme();
     const { signInWithGoogle } = useAuth();
 
     async function handleSignInWithGoogle() {
         try {
-            await signInWithGoogle();
+            setIsLoading(true);
+            return await signInWithGoogle();
         } catch (error) {
             console.log(error);
             Alert.alert('Não foi possível entrar na conta Google');
+            setIsLoading(false);
         }
     }
 
@@ -61,6 +67,13 @@ export function SignIn() {
                         svg={Apple}
                     />
                 </FooterWrapper>
+
+                { isLoading && (
+                    <ActivityIndicator 
+                        color={theme.colors.shape} 
+                        style={{ marginTop: 18 }}
+                    />
+                )}
             </Footer>
         </Container>
     );

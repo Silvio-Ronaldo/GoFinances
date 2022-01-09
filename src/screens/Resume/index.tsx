@@ -14,6 +14,8 @@ import { HistoryCard } from '../../components/HistoryCard';
 
 import { categories } from '../../utils/categories';
 
+import { useAuth } from '../../hooks/auth';
+
 import { 
     Container, 
     Content, 
@@ -50,6 +52,7 @@ export function Resume() {
     const [isLoading, setIsLoading] = useState(false);
 
     const theme = useTheme();
+    const { user } = useAuth();
 
     const handleSelectedMonth = useCallback((action: 'next' | 'prev') => {
         if (action === 'prev') {
@@ -61,7 +64,7 @@ export function Resume() {
 
     const loadCategoriesCost = useCallback(async () => {
         setIsLoading(true);
-        const collectionKey = '@gofinances:transactions';
+        const collectionKey = `@gofinances:transactions_user:${user.id}`;
         const response = await AsyncStorage.getItem(collectionKey);
         const transactions = response ? JSON.parse(response) : [];
 
