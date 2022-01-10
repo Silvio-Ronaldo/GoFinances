@@ -26,7 +26,7 @@ export function AppRoutes() {
                 },
                 tabBarItemStyle: {
                     padding: 8,
-                }
+                },
             }}
         >
             <Screen 

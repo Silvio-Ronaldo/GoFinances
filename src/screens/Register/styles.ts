@@ -6,7 +6,6 @@ export const Container = styled.View`
 `;
 
 export const Form = styled.View`
-    flex: 1;
     width: 100%;
 
     padding: 24px;
@@ -22,4 +21,12 @@ export const TransactionTypes = styled.View`
 
     margin-top: 8px;
     margin-bottom: 16px;
+`;
+
+export const ButtonContainer = styled.View`
+    position: absolute;
+    bottom: -200px;
+    left: 24px;
+    right: 24px;
+    width: 100%;
 `;

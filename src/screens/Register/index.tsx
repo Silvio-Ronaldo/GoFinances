@@ -21,6 +21,7 @@ import {
     Form,
     Fields,
     TransactionTypes,
+    ButtonContainer,
 } from './styles';
 
 type TransactionType = 'up' | 'down';
@@ -164,10 +165,12 @@ export function Register() {
                         />
                     </Fields>
 
-                    <Button 
-                        title="Adicionar" 
-                        onPress={handleSubmit(handleRegister)}
-                    />
+                    <ButtonContainer>
+                        <Button 
+                            title="Adicionar" 
+                            onPress={handleSubmit(handleRegister)}
+                        />
+                    </ButtonContainer>
                 </Form>
 
                 <Modal 
