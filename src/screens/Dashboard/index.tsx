@@ -213,8 +213,28 @@ export function Dashboard() {
             (transaction: DataListProps) => transaction.id !== id
         );
 
-        setTransactionsData(transactionsFiltered);
-        await AsyncStorage.setItem(collectionKey, JSON.stringify(transactionsFiltered));
+        if (transactionsFiltered.length === 0) {
+            setTransactionsData([] as DataListProps[]);
+            await AsyncStorage.removeItem(collectionKey);
+            setIsEmpty(true);
+            setHighlightData({
+                entries: {
+                    total: 'R$ 0,00',
+                    lastTransactionDate: 'Nenhuma entrada',
+                },
+                cost: {
+                    total: 'R$ 0,00',
+                    lastTransactionDate: 'Nenhuma saída',
+                },
+                sum: {
+                    total: 'R$ 0,00',
+                    lastTransactionDate: 'Não há transações'
+                }
+            } as HighlightCardData);
+        } else {
+            setTransactionsData(transactionsFiltered);
+            await AsyncStorage.setItem(collectionKey, JSON.stringify(transactionsFiltered));
+        }
         await loadTransactions();
 
         return;
