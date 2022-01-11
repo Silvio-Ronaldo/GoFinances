@@ -60,8 +60,8 @@ export function SignIn() {
                 </Title>
 
                 <Description>
-                    Faça seu login com {'\n'}
-                    a conta abaixo
+                    Faça seu login com uma {'\n'}
+                    das contas abaixo
                 </Description>
             </Header>
 
