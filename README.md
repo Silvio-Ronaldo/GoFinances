@@ -1,11 +1,10 @@
 <h1 align="center">
-  <img src="./github/logo.svg" alt="GoFinances Logo" height=200 width=400 />
-  <h1>GoFinances</h1>
+  <img src="./src/assets/logo.svg" alt="GoFinances Logo" height=200 width=400 />
 </h1>
 
 <p align="center">
   <strong>
-   💲 GoFinance is an app to manage personal finances. 💰</br>
+   💲 GoFinances is an app to manage personal finances. 💰</br>
   </strong></br>Practical project for study.
 </p>
 
@@ -33,11 +32,7 @@
   📋 Table of contents
 </h2>
 <ul>
-  <li><a href="https://github.com/Silvio-Ronaldo/psyheart-mobile#-status">Status</a></li>
-  <li><a href="https://github.com/Silvio-Ronaldo/psyheart-mobile#-how-it-works">How it works</a></li>
-  <li><a href="https://github.com/Silvio-Ronaldo/psyheart-mobile#-its-paid">It's paid?</a></li>
   <li><a href="https://github.com/Silvio-Ronaldo/psyheart-mobile#%EF%B8%8F-demonstration">Demonstration</a></li>
-  <li><a href="https://github.com/Silvio-Ronaldo/psyheart-mobile#-upcoming-features">Upcoming features</a></li>
   <li><a href="https://github.com/Silvio-Ronaldo/psyheart-mobile#%EF%B8%8F-technologies">Technologies</a></li>
   <li><a href="https://github.com/Silvio-Ronaldo/psyheart-mobile#-author">Author</a></li>
   <li><a href="https://github.com/Silvio-Ronaldo/psyheart-mobile#%EF%B8%8F-license">License</a></li>
@@ -46,7 +41,9 @@
 
 
 <h2>🖥️ Demonstration</h2>
-<p></p>
+<p align="center">
+  <img src="./github/gofinances.gif" alt="GoFinances Demo" height="500" />
+</p>
  
 
 
