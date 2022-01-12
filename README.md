@@ -32,10 +32,10 @@
   📋 Table of contents
 </h2>
 <ul>
-  <li><a href="https://github.com/Silvio-Ronaldo/psyheart-mobile#%EF%B8%8F-demonstration">Demonstration</a></li>
-  <li><a href="https://github.com/Silvio-Ronaldo/psyheart-mobile#%EF%B8%8F-technologies">Technologies</a></li>
-  <li><a href="https://github.com/Silvio-Ronaldo/psyheart-mobile#-author">Author</a></li>
-  <li><a href="https://github.com/Silvio-Ronaldo/psyheart-mobile#%EF%B8%8F-license">License</a></li>
+  <li><a href="https://github.com/Silvio-Ronaldo/GoFinances#%EF%B8%8F-demonstration">Demonstration</a></li>
+  <li><a href="https://github.com/Silvio-Ronaldo/GoFinances#%EF%B8%8F-technologies">Technologies</a></li>
+  <li><a href="https://github.com/Silvio-Ronaldo/GoFinances#-author">Author</a></li>
+  <li><a href="https://github.com/Silvio-Ronaldo/GoFinances#%EF%B8%8F-license">License</a></li>
 </ul></br>
 
 
