@@ -43,6 +43,7 @@
 <h2>🖥️ Demonstration</h2>
 <p align="center">
   <img src="./github/gofinances.gif" alt="GoFinances Demo" height="500" />
+  <img src="./github/gofinances2.gif" alt="GoFinances Demo" height="500" />
 </p>
  
 
