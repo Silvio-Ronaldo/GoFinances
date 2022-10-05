@@ -4,7 +4,6 @@ import axios from 'axios';
 import * as AuthSession from 'expo-auth-session';
 
 const { GOOGLE_CLIENT_ID } = process.env;
-const { GOOGLE_REDIRECT_URI } = process.env;
 const { GITHUB_CLIENT_ID } = process.env;
 const { GITHUB_CLIENT_SECRET } = process.env;
 
@@ -71,6 +70,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
             const RESPONSE_TYPE = 'token';
             const SCOPE = encodeURI('profile email');
             const PROMPT = ['select_account'];
+            const GOOGLE_REDIRECT_URI = AuthSession.makeRedirectUri({ useProxy: true });
 
             const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${GOOGLE_REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${SCOPE}&prompt=${PROMPT}`;
         

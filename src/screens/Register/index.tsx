@@ -162,6 +162,7 @@ export function Register() {
                         <CategorySelect 
                             title={category.name}
                             onPress={handleOpenCategoriesModal}
+                            testID='button-category'
                         />
                     </Fields>
 
@@ -176,6 +177,7 @@ export function Register() {
                 <Modal 
                     visible={categoriesModalOpen}
                     statusBarTranslucent
+                    testID='modal-category'
                 >
                     <Categories 
                         category={category}

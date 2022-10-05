@@ -56,3 +56,6 @@ dist/
 
 # Variáveis de ambiente
 .env
+
+# Coverage Reporters
+coverage
