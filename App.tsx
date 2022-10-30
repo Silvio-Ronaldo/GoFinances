@@ -8,6 +8,8 @@ import {
   Poppins_500Medium, 
   Poppins_700Bold 
 } from '@expo-google-fonts/poppins';
+import * as SplashScreen from 'expo-splash-screen';
+
 
 import theme from './src/global/styles/theme';
 
